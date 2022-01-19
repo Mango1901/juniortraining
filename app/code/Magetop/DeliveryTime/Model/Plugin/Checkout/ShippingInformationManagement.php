@@ -21,10 +21,16 @@
 
 namespace Magetop\DeliveryTime\Model\Plugin\Checkout;
 
+use DateTime;
+use DateTimeZone;
 use Magento\Checkout\Api\Data\ShippingInformationInterface;
+use Magento\Checkout\Exception;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magetop\DeliveryTime\Helper\Data;
+use function PHPUnit\Framework\throwException;
 
 /**
  * Class ShippingInformationManagement
@@ -41,19 +47,26 @@ class ShippingInformationManagement
      * @var Data
      */
     private $mpDtHelper;
+    /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
      * ShippingInformationManagement constructor.
      *
      * @param CartRepositoryInterface $cartRepository
      * @param Data $mpDtHelper
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
-        Data $mpDtHelper
+        Data $mpDtHelper,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->cartRepository = $cartRepository;
         $this->mpDtHelper     = $mpDtHelper;
+        $this->scopeConfig    = $scopeConfig;
     }
 
     /**
@@ -75,9 +88,32 @@ class ShippingInformationManagement
             return [$cartId, $addressInformation];
         }
 
+        $isEnableDeliveryTimeForTimeDisableSameDayDeliveryAfter = $this->scopeConfig->getValue(
+            "mpdeliverytime/general/is_enable_disable_same_day_delivery_after",
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        $deliveryTimeForTimeDisableSameDayDeliveryAfter = $this->scopeConfig->getValue(
+            "mpdeliverytime/general/time_disable_same_day_delivery_after",
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        $formatDeliveryDate = "";
+        $deliveryTimeFormat = "";
+        if ($isEnableDeliveryTimeForTimeDisableSameDayDeliveryAfter == 1) {
+            $deliveryTimeFormat = str_replace(",", ":", $deliveryTimeForTimeDisableSameDayDeliveryAfter);
+            $deliveryDate = (array)new DateTime("tomorrow", new DateTimeZone("Asia/HO_CHI_MINH"));
+            $formatDeliveryDate = date("d-m-Y", strtotime($deliveryDate["date"]));
+        } else {
+            if ($extensionAttributes->getMpDeliveryDate() == null) {
+
+            }
+            if ($extensionAttributes->getMpDeliveryTime() == null) {
+            }
+        }
+
         $deliveryInformation = [
-            'deliveryDate'      => $extensionAttributes->getMpDeliveryDate(),
-            'deliveryTime'      => $extensionAttributes->getMpDeliveryTime(),
+            'deliveryDate'      => ($extensionAttributes->getMpDeliveryDate()) ? $extensionAttributes->getMpDeliveryDate() : $formatDeliveryDate ,
+            'deliveryTime'      => ($extensionAttributes->getMpDeliveryTime()) ? $extensionAttributes->getMpDeliveryTime() : $deliveryTimeFormat ,
             'houseSecurityCode' => $extensionAttributes->getMpHouseSecurityCode(),
             'deliveryComment'   => $extensionAttributes->getMpDeliveryComment()
         ];

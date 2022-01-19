@@ -1,12 +1,12 @@
 <?php
 
-namespace Magetop\DeliveryTime\Observer;
+namespace Magetop\DeliveryTime\Cron;
 
-use Magento\Framework\Event\ObserverInterface;
 use Magetop\DeliveryTime\Helper\Email;
+use \Psr\Log\LoggerInterface;
 
-class CustomerNotificationObserver implements ObserverInterface
-{
+class SendEmail {
+
     private $helperEmail;
 
     public function __construct(
@@ -15,8 +15,9 @@ class CustomerNotificationObserver implements ObserverInterface
         $this->helperEmail = $helperEmail;
     }
 
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute()
     {
         return $this->helperEmail->sendEmail();
     }
+
 }

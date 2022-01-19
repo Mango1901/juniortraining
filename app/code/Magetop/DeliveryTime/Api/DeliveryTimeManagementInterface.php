@@ -21,6 +21,9 @@
 
 namespace Magetop\DeliveryTime\Api;
 
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magetop\DeliveryTime\Api\Data\DeliveryTimeInterface;
+
 /**
  * Interface DeliveryTimeManagementInterface
  *
@@ -31,8 +34,8 @@ interface DeliveryTimeManagementInterface
     /**
      * @param string $cartId
      *
-     * @return \Magetop\DeliveryTime\Api\Data\DeliveryTimeInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return DeliveryTimeInterface
+     * @throws NoSuchEntityException
      */
     public function get($cartId);
 }

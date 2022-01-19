@@ -50,7 +50,8 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
                     foreach ($arrayTimes as $arrayTime) {
                         $array[] = str_replace("h", ":", $arrayTime);
                     }
-                    $compareDeliveryDate = date('d-m-Y H:i', strtotime($deliveryDate . " " . "$array[1]"));
+                    $getTime = isset($array[1]) ? $array[1] : $array[0];
+                    $compareDeliveryDate = date('d-m-Y H:i', strtotime($deliveryDate . " " . "$getTime"));
                     $compareTest = date("d-m-Y H:i", strtotime($test1["date"]));
                     $hourDiff = round((strtotime($compareDeliveryDate) - strtotime($compareTest)) / 3600, 1);
                     if ($hourDiff > 0 && $hourDiff < 1) {
