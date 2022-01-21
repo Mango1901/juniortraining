@@ -1,0 +1,101 @@
+<div class="delivery-information">
+    <!-- ko ifnot: window.checkoutConfig.mpDtConfig.isEnableDisableSameDayDeliveryAfter -->
+    <div class="delivery-date">
+        <div class="title">
+            <span data-bind="i18n: 'Delivery Date'"></span>
+            <span style="color: red">*</span>
+        </div>
+        <div class="control">
+            <input type="text" readonly="readonly" data-bind="mpdatepicker: true, value: deliveryDate"
+                   name="delivery-date" id="mp-delivery-date" required/>
+            <div class="remove-delivery-date" data-bind="click: removeDeliveryDate, visible: isVisible()">
+                <i class="fa fa-remove"></i>
+            </div>
+        </div>
+        <!-- ko if: window.checkoutConfig.mpDtConfig.isEnableNoticeByAdmin -->
+        <div class="notice-by-admin">
+            <span data-bind="i18n: noticeByAdmin"></span>
+        </div>
+        <div class="message error mp_delivery_date" style="display: none"></div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: window.checkoutConfig.mpDtConfig.isEnableDisableSameDayDeliveryAfter -->
+    <div class="delivery-date">
+        <div class="title">
+            <span data-bind="i18n: 'Delivery Date'"></span>
+            <span style="color: red">*</span>
+        </div>
+        <div class="control">
+           <span>The order will be arrived tomorrow</span>
+        </div>
+        <!-- ko if: window.checkoutConfig.mpDtConfig.isEnableNoticeByAdmin -->
+        <div class="notice-by-admin">
+            <span data-bind="i18n: noticeByAdmin"></span>
+        </div>
+        <div class="message error mp_delivery_date" style="display: none"></div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: window.checkoutConfig.mpDtConfig.isEnableDisableSameDayDeliveryAfter -->
+        <!-- ko if: window.checkoutConfig.mpDtConfig.isEnabledDeliveryTime -->
+    <div class="delivery-time">
+        <div class="title">
+            <span data-bind="i18n: 'Delivery Time'"></span>
+            <span style="color: red">*</span>
+        </div>
+        <div class="control">
+            <select class="select" name="delivery-time" id="mp-delivery-time" required
+                    data-bind="
+                    value: deliveryTime,
+                    options: deliveryTimeOptions,
+                    optionsCaption: $t('-- Please select a delivery time--')"
+            ></select>
+        </div>
+        <div class="message error mp_delivery_time" style="display: none"></div>
+    </div>
+        <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: window.checkoutConfig.mpDtConfig.isEnableDisableSameDayDeliveryAfter -->
+    <div class="delivery-time">
+        <div class="title">
+            <span data-bind="i18n: 'Delivery Time'"></span>
+            <span style="color: red">*</span>
+        </div>
+        <div class="control">
+            <input name="delivery-time" data-bind="value: timeDisableSameDayDeliveryAfter" readonly>
+        </div>
+        <div class="message error mp_delivery_time" style="display: none"></div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if: window.checkoutConfig.mpDtConfig.isEnabledHouseSecurityCode -->
+    <div class="house-security-code">
+        <div class="title">
+            <span data-bind="i18n: 'House Security Code'"></span>
+            <span style="color: red">*</span>
+        </div>
+        <div class="control">
+            <input type="text" name="house-security-code" id="mp-house-security-code"
+                   data-bind="value: houseSecurityCode">
+        </div>
+        <div class="message error mp_house_security_code" style="display: none"></div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if: window.checkoutConfig.mpDtConfig.isEnabledDeliveryComment -->
+    <div class="delivery-comment">
+        <div class="title">
+            <span data-bind="i18n: 'Delivery Comment'"></span>
+        </div>
+        <div class="control">
+            <div class="input-box">
+                <textarea name="delivery-comment" id="mp-delivery-comment" rows="2"
+                          data-bind="value: deliveryComment"></textarea>
+            </div>
+        </div>
+        <div class="message error mp_delivery_comment" style="display: none"></div>
+    </div>
+    <!-- /ko -->
+</div>
+

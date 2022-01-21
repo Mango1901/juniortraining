@@ -1,0 +1,20 @@
+<div class="amdelivery-sidebar-container">
+    <!-- ko if: deliveryDate -->
+    <div>
+        <span class="amdelivery-label" data-bind="i18n: 'Delivery Date:'"></span>
+        <span class="amdelivery-value" data-bind="text: deliveryDate"></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: deliveryTime -->
+    <div>
+        <span class="amdelivery-label" data-bind="i18n: 'Delivery Time:'"></span>
+        <span class="amdelivery-value" data-bind="text: deliveryTime"></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: deliveryComment -->
+    <div>
+        <span class="amdelivery-label" data-bind="i18n: 'Delivery Comment:'"></span>
+        <span class="amdelivery-value" data-bind="text: deliveryComment"></span>
+    </div>
+    <!-- /ko -->
+</div>

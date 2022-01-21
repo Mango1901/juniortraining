@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magenest\DeliveryTime\Api\Data\DeliveryTimeInterface" type="Magenest\DeliveryTime\Model\Api\Data\DeliveryTime"/>
+    <preference for="Magenest\DeliveryTime\Api\DeliveryTimeManagementInterface" type="Magenest\DeliveryTime\Model\Api\DeliveryTimeManagement"/>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="mpdt_saveDeliveryInformation" type="Magenest\DeliveryTime\Model\Plugin\Checkout\ShippingInformationManagement"/>
+    </type>
+</config>

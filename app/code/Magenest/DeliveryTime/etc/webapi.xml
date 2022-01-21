@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/mp-delivery-information/:cartId" method="GET">
+        <service class="Magenest\DeliveryTime\Api\DeliveryTimeManagementInterface" method="get"/>
+        <resources>
+            <resource ref="Magenest_DeliveryTime::configuration"/>
+        </resources>
+    </route>
+</routes>

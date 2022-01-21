@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mpdeliverytime>
+            <general>
+                <is_enable_notice_by_admin>1</is_enable_notice_by_admin>
+                <date_format>dd-mm-yy</date_format>
+                <days_off>0,6</days_off>
+            </general>
+        </mpdeliverytime>
+    </default>
+</config>
