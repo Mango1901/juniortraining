@@ -54,7 +54,7 @@ define([
                 }
             }
 
-            if (deliveryComment.length > 500) {
+            if (typeof deliveryComment != "undefined" && deliveryComment.length > 500) {
                 $(".message.error.mp_delivery_comment").css("display", "inline-block");
                 $(".message.error.mp_delivery_comment").html("the delivery comment is only allow max 500 characters");
                 return false;
